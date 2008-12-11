@@ -44,6 +44,7 @@ EXPIRATION_RECENT_URLS_SECONDS = 90
 ## EXPIRATION_RECENT_URLS_SECONDS = 1
 
 HTTP_PREFIX = "http://"
+HTTPS_PREFIX = "http://"
 
 IGNORE_HEADERS = frozenset([
   'set-cookie',
@@ -174,7 +175,7 @@ class MirroredContent(object):
 
 class BaseHandler(webapp.RequestHandler):
   def get_relative_url(self):
-    slash = self.request.url.find("/", len(HTTP_PREFIX))
+    slash = self.request.url.find("/", len(self.request.scheme + "://"))
     if slash == -1:
       return "/"
     return self.request.url[slash:]
@@ -209,8 +210,12 @@ class HomeHandler(BaseHandler):
 
     # Do this dictionary construction here, to decouple presentation from
     # how we store data.
+    secure_url = None
+    if self.request.scheme == "http":
+      secure_url = "https://mirrorrr.appspot.com"
     context = {
       "latest_urls": latest_urls,
+      "secure_url": secure_url,
     }
     self.response.out.write(template.render("main.html", context))
 
@@ -223,6 +228,7 @@ class MirrorHandler(BaseHandler):
     logging.debug('User-Agent = "%s", Referrer = "%s"',
                   self.request.user_agent,
                   self.request.referer)
+    logging.debug('Base_url = "%s", url = "%s"', base_url, self.request.url)
 
     translated_address = self.get_relative_url()[1:]  # remove leading /
     mirrored_url = HTTP_PREFIX + translated_address

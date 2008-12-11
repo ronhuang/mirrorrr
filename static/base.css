@@ -118,3 +118,20 @@ body {
 .url24 { color: #f5f5f5 !important; }
 .url25 { color: #ffffff !important; }
 
+/* secure link */
+.secure {
+  text-align: center;
+  margin-top: 50px;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.secure img {
+  margin-bottom: -0.3em;
+  border: 0;
+}
+
+.secure a, .secure a:hover, .secure a:visited, .secure a:active {
+  color: #000;
+  text-decoration: none;
+}

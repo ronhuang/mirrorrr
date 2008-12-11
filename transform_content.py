@@ -22,16 +22,16 @@ import urlparse
 ################################################################################
 
 # URLs that have absolute addresses
-ABSOLUTE_URL_REGEX = r"(http:)?//(?P<url>[^\"'> \t\)]+)"
+ABSOLUTE_URL_REGEX = r"(http(s?):)?//(?P<url>[^\"'> \t\)]+)"
 
 # URLs that are relative to the base of the current hostname.
-BASE_RELATIVE_URL_REGEX = r"/(?!(/)|(http://)|(url\())(?P<url>[^\"'> \t\)]*)"
+BASE_RELATIVE_URL_REGEX = r"/(?!(/)|(http(s?)://)|(url\())(?P<url>[^\"'> \t\)]*)"
 
 # URLs that have '../' or './' to start off their paths.
-TRAVERSAL_URL_REGEX = r"(?P<relative>\.(\.)?)/(?!(/)|(http://)|(url\())(?P<url>[^\"'> \t\)]*)"
+TRAVERSAL_URL_REGEX = r"(?P<relative>\.(\.)?)/(?!(/)|(http(s?)://)|(url\())(?P<url>[^\"'> \t\)]*)"
 
 # URLs that are in the same directory as the requested URL.
-SAME_DIR_URL_REGEX = r"(?!(/)|(http://)|(url\())(?P<url>[^\"'> \t\)]+)"
+SAME_DIR_URL_REGEX = r"(?!(/)|(http(s?)://)|(url\())(?P<url>[^\"'> \t\)]+)"
 
 # URL matches the root directory.
 ROOT_DIR_URL_REGEX = r"(?!//(?!>))/(?P<url>)(?=[ \t\n]*[\"'\)>/])"

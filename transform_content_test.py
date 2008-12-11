@@ -146,6 +146,20 @@ class TransformTest(unittest.TestCase):
       "http://a248.e.akamai.net/foobar/is/the/path.html",
       "/",
       "/a248.e.akamai.net/")
+  
+  def testSecureContent(self):
+    self._RunTransformTest(
+      "slashdot.org",
+      "https://slashdot.org",
+      "https://images.slashdot.org/iestyles.css?T_2_5_0_204",
+      "/images.slashdot.org/iestyles.css?T_2_5_0_204")
+
+  def testPartiallySecureContent(self):
+    self._RunTransformTest(
+      "slashdot.org",
+      "http://slashdot.org",
+      "https://images.slashdot.org/iestyles.css?T_2_5_0_204",
+      "/images.slashdot.org/iestyles.css?T_2_5_0_204")
 
 ################################################################################
 

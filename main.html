@@ -4,7 +4,7 @@
 <html>
 <head>
   <title>mirror - ɹoɹɹıɯ</title>
-  <link rel="stylesheet" href="static/base.css" type="text/css" charset="utf-8"/>
+  <link rel="stylesheet" href="static/base.2.css" type="text/css" charset="utf-8"/>
   <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
   <script type="text/javascript" charset="utf-8">
     var activeColor = "#000000";
@@ -66,6 +66,10 @@
     </div>
     {% endfor %}
   </div>
+</div>
+
+<div class="secure">
+  {% if secure_url %}<a href="{{secure_url}}">{% endif %}<img src="/static/{% if secure_url %}no{% endif %}lock.png" width="16" height="16"> {% if secure_url %}not secure</a>{% else %}secure{% endif %}
 </div>
 
 </div>
