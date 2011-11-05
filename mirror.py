@@ -67,6 +67,8 @@ TRANSFORMED_CONTENT_TYPES = frozenset([
   "text/css",
 ])
 
+HOSTING_BASE_URL = 'mirror.ronhuang.org'
+
 MIRROR_HOSTS = frozenset([
   'mirrorr.com',
   'mirrorrr.com',
@@ -75,6 +77,7 @@ MIRROR_HOSTS = frozenset([
   'www1.mirrorrr.com',
   'www2.mirrorrr.com',
   'www3.mirrorrr.com',
+  HOSTING_BASE_URL,
 ])
 
 MAX_CONTENT_SIZE = 10 ** 6
@@ -212,7 +215,7 @@ class HomeHandler(BaseHandler):
     # how we store data.
     secure_url = None
     if self.request.scheme == "http":
-      secure_url = "https://mirrorrr.appspot.com"
+      secure_url = "https://" + HOSTING_BASE_URL
     context = {
       "latest_urls": latest_urls,
       "secure_url": secure_url,
