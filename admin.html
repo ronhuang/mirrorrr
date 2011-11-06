@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ron's Private Mirror Service</title>
+    <meta name="description" content="Mirrors the content of URLs you supply">
+    <meta name="author" content="Ron Huang">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet" href="static/base.css" type="text/css">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-7044154-11']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">Mirror</a>
+          <ul class="nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/admin">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+          <h1>Home <small>Mirrors the content of URLs you supply</small></h1>
+        </div>
+        <div class="row">
+          <div class="span9">
+            <h2>Add Users</h2>
+            <form action="" method="post" accept-charset="utf-8">
+              <fieldset>
+                <div class="clearfix">
+                  <label for="username">Username</label>
+                  <div class="input">
+                    <input class="xlarge" id="username" name="username" size="30" type="text" placeholder="Type username here...">
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <label for="role">Role</label>
+                  <div class="input">
+                    <select name="role" id="role">
+                      <option>user</option>
+                      <option>admin</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="actions">
+                  <input type="submit" class="btn" value="Add">
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="span5">
+            <h3>Actions</h3>
+            <div>
+              <a class="btn" href="/dump">Dump</a>
+              <a class="btn" href="/cleanup">Cleanup</a>
+              <a class="btn" href="/kaboom">Kaboom</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>&copy; Ron Huang 2011</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

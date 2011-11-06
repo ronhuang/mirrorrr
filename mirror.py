@@ -231,6 +231,26 @@ class HomeHandler(BaseHandler):
     self.response.out.write(template.render("main.html", context))
 
 
+class AdminHandler(BaseHandler):
+  def get(self):
+    # Do this dictionary construction here, to decouple presentation from
+    # how we store data.
+    context = {
+    }
+    self.response.out.write(template.render("admin.html", context))
+
+  def post(self):
+    username = self.request.get("username")
+    role = self.request.get("role")
+    if not username or not role:
+      return self.redirect("/admin")
+
+    # check if exist
+    
+
+    return self.redirect("/admin")
+
+
 class MirrorHandler(BaseHandler):
   def get(self, base_url):
     assert base_url
@@ -294,7 +314,7 @@ class MirrorHandler(BaseHandler):
     self.response.out.write(content.data)
 
 
-class AdminHandler(webapp.RequestHandler):
+class DumpHandler(webapp.RequestHandler):
   def get(self):
     self.response.headers['content-type'] = 'text/plain'
     self.response.out.write(str(memcache.get_stats()))
@@ -338,6 +358,7 @@ app = webapp.WSGIApplication([
   (r"/main", HomeHandler),
   (r"/kaboom", KaboomHandler),
   (r"/admin", AdminHandler),
+  (r"/dump", DumpHandler),
   (r"/cleanup", CleanupHandler),
   (r"/([^/]+).*", MirrorHandler)
 ], debug=DEBUG)
