@@ -29,12 +29,14 @@ import wsgiref.handlers
 
 from google.appengine.api import memcache
 from google.appengine.api import urlfetch
+from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.runtime import apiproxy_errors
 
 import transform_content
+import acl
 
 ################################################################################
 
@@ -70,7 +72,7 @@ TRANSFORMED_CONTENT_TYPES = frozenset([
   "text/css",
 ])
 
-HOSTING_BASE_URL = 'mirror.ronhuang.org'
+HOSTING_BASE_URL = 'ron-private-mirror-service.appspot.com'
 
 MIRROR_HOSTS = frozenset([
   'mirrorr.com',
@@ -186,6 +188,13 @@ class BaseHandler(webapp.RequestHandler):
       return "/"
     return self.request.url[slash:]
 
+  def is_valid_user(self):
+    user = users.get_current_user()
+    uid = user.email()
+    uacl = acl.Acl(uid)
+    has_access = uacl.has_access(class_name=self.__class__.__name__, action_name='get')
+    return has_access
+
 
 class HomeHandler(BaseHandler):
   def get(self):
@@ -225,7 +234,12 @@ class HomeHandler(BaseHandler):
 class MirrorHandler(BaseHandler):
   def get(self, base_url):
     assert base_url
-    
+
+    if not self.is_valid_user():
+      self.error(401)
+      self.response.out.write('401 Unauthorized')
+      return
+
     # Log the user-agent and referrer, to see who is linking to us.
     logging.debug('User-Agent = "%s", Referrer = "%s"',
                   self.request.user_agent,
