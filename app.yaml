@@ -32,6 +32,14 @@ handlers:
   login: admin
   script: mirror.py
 
+- url: /main
+  script: mirror.py
+  secure: always
+
+- url: /
+  script: mirror.py
+  secure: always
+
 - url: /.*
   login: required
   script: mirror.py
