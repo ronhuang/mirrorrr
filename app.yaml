@@ -1,4 +1,4 @@
-application: mirrorrr
+application: ron-private-mirror-service
 version: 1
 runtime: python
 api_version: 1
@@ -33,5 +33,6 @@ handlers:
   script: mirror.py
 
 - url: /.*
+  login: required
   script: mirror.py
   secure: always
