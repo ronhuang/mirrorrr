@@ -240,13 +240,18 @@ class AdminHandler(BaseHandler):
     self.response.out.write(template.render("admin.html", context))
 
   def post(self):
-    username = self.request.get("username")
+    email = self.request.get("email")
     role = self.request.get("role")
-    if not username or not role:
+    if not email or not role:
       return self.redirect("/admin")
 
     # check if exist
-    
+    uacl = acl.Acl(email)
+    if uacl.is_one(role):
+      return self.redirect("/admin")
+
+    urole = acl.Role(user=email, role=role)
+    urole.put()
 
     return self.redirect("/admin")
 
