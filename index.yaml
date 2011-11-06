@@ -15,8 +15,3 @@ indexes:
   - name: mode
   - name: name
   - name: position
-
-- kind: EntryPoint
-  properties:
-  - name: last_updated
-    direction: desc

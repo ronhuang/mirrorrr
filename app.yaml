@@ -24,6 +24,10 @@ handlers:
   login: admin
   script: mirror.py
 
+- url: /setup
+  login: admin
+  script: mirror.py
+
 - url: /dump
   login: admin
   script: mirror.py

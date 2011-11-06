@@ -319,6 +319,15 @@ class MirrorHandler(BaseHandler):
     self.response.out.write(content.data)
 
 
+class SetupHandler(webapp.RequestHandler):
+  def get(self):
+    access = acl.Access(mode='role', name='user', class_name='MirrorHandler', action_name='get', flag=True)
+    access.put()
+
+    self.response.headers['content-type'] = 'text/plain'
+    self.response.out.write('user role added.')
+
+
 class DumpHandler(webapp.RequestHandler):
   def get(self):
     self.response.headers['content-type'] = 'text/plain'
@@ -363,6 +372,7 @@ app = webapp.WSGIApplication([
   (r"/main", HomeHandler),
   (r"/kaboom", KaboomHandler),
   (r"/admin", AdminHandler),
+  (r"/setup", SetupHandler),
   (r"/dump", DumpHandler),
   (r"/cleanup", CleanupHandler),
   (r"/([^/]+).*", MirrorHandler)
