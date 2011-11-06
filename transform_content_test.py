@@ -15,6 +15,9 @@
 
 __author__ = "Brett Slatkin (bslatkin@gmail.com)"
 
+from google.appengine.dist import use_library
+use_library('django', '1.2')
+
 import logging
 import unittest
 
