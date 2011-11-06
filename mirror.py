@@ -216,12 +216,8 @@ class HomeHandler(BaseHandler):
 
     # Do this dictionary construction here, to decouple presentation from
     # how we store data.
-    secure_url = None
-    if self.request.scheme == "http":
-      secure_url = "https://" + HOSTING_BASE_URL
     context = {
       "latest_urls": latest_urls,
-      "secure_url": secure_url,
     }
     self.response.out.write(template.render("main.html", context))
 
